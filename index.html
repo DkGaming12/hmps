@@ -542,6 +542,7 @@
 
     const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
     const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const $ = s => document.querySelector(s);
 
     $("#year").textContent = new Date().getFullYear();
     const navToggle = $("#navToggle");
@@ -644,14 +645,9 @@
           const wa = document.getElementById('mpWa').value.trim();
           const insta = document.getElementById('mpInsta').value.trim();
           const msg = document.getElementById('mpMsg').value.trim();
-          const confirm = document.getElementById('mpConfirm').checked;
 
           if (!org || !name || !wa) {
             alert('Mohon isi Nama Organisasi, Nama Kontak, dan Nomor WhatsApp.');
-            return;
-          }
-          if (!confirm) {
-            alert('Silakan konfirmasi bahwa persyaratan Media Partner telah dipenuhi.');
             return;
           }
 
