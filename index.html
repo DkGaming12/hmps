@@ -524,7 +524,11 @@
 
         const divisi = KEPENGURUSAN.divisi.map(d => {
           const anggota = anggotaByTag[d.tag];
-          return anggota ? Object.assign({}, d, { anggota }) : d;
+          const updated = anggota ? Object.assign({}, d, { anggota }) : d;
+          if (d.tag === 'ADVOKASI' && !updated.anggota.includes('Devi Augustin Umpriana Syaputri')) {
+            updated.anggota.push('Devi Augustin Umpriana Syaputri');
+          }
+          return updated;
         });
         Object.keys(anggotaByTag).forEach(tag => {
           if (!divisi.some(d => d.tag === tag)) {
