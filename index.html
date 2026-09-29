@@ -744,6 +744,41 @@
 
     renderKepengurusan();
   </script>
+  <script>
+    (() => {
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const targets = '.section-head, .visi, .prodi-card, .program-card, .news-panel, .inti-card, .divisi-card, .footer-inner > div';
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -36px 0px' });
+
+      const observe = (root = document) => {
+        root.querySelectorAll(targets).forEach(el => {
+          if (el.classList.contains('reveal')) return;
+          el.classList.add('reveal');
+          const siblings = el.parentElement.children;
+          el.style.setProperty('--reveal-index', Array.prototype.indexOf.call(siblings, el) % 5);
+          observer.observe(el);
+        });
+      };
+
+      observe();
+      document.documentElement.classList.add('motion-ready');
+      const grids = ['intiGrid', 'divisiGrid'].map(id => document.getElementById(id)).filter(Boolean);
+      new MutationObserver(records => records.forEach(record => record.addedNodes.forEach(node => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          if (node.matches(targets)) observe(node.parentElement);
+          else observe(node);
+        }
+      }))).observe(document.getElementById('intiGrid') || document.body, { childList: true });
+      const divisiGrid = document.getElementById('divisiGrid');
+      if (divisiGrid) new MutationObserver(() => observe(divisiGrid)).observe(divisiGrid, { childList: true });
+    })();
+  </script>
 </body>
 
 </html>

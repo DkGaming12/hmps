@@ -204,6 +204,8 @@ section { padding-block:76px }
 @media (max-width:900px) { .inti-grid{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:560px) { .inti-grid{grid-template-columns:1fr} }
 .inti-card { background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:22px; display:flex; align-items:center; gap:16px }
+.inti-card,.divisi-card { transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease }
+.inti-card:hover,.divisi-card:hover { transform:translateY(-4px); box-shadow:var(--shadow-lift); border-color:color-mix(in srgb,var(--accent) 38%,var(--line)) }
 .avatar { flex:none; width:52px; height:52px; border-radius:50%; display:grid; place-items:center; font-family:var(--font-mono); font-weight:600; font-size:.86rem; color:#F8FAFC; background:linear-gradient(135deg,var(--emerald-ink),var(--emerald)) }
 .inti-card .jabatan { font-family:var(--font-mono); font-size:.66rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:4px }
 .inti-card .nama { font-weight:700; font-size:.98rem; line-height:1.35 }
@@ -239,6 +241,26 @@ section { padding-block:76px }
 .footer-bottom { position:relative; z-index:1; margin-top:52px; padding-top:22px; border-top:1px solid var(--hero-line); display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap; font-family:var(--font-mono); font-size:.72rem }
 .footer-bottom a { color:var(--gold-soft); text-decoration:none }
 .footer-bottom a:hover { text-decoration:underline }
+
+/* Gentle entrance and scroll reveal animations */
+@keyframes rise-in { from { opacity:0; transform:translateY(18px) } to { opacity:1; transform:translateY(0) } }
+.hero-inner > div:first-child { animation:rise-in .7s cubic-bezier(.2,.7,.2,1) both }
+.hero-inner > .terminal { animation:rise-in .8s .12s cubic-bezier(.2,.7,.2,1) both }
+.motion-ready .reveal { opacity:0; transform:translateY(22px); transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1); transition-delay:var(--reveal-delay,0ms) }
+.motion-ready .reveal.is-visible { opacity:1; transform:translateY(0) }
+.inti-grid > .reveal,.divisi-grid > .reveal,.program-grid > .reveal { --reveal-delay:calc(var(--reveal-index,0) * 75ms) }
+.anggota-chip { transition:transform .18s ease,border-color .18s ease,color .18s ease }
+.anggota-chip:hover { transform:translateY(-2px); border-color:var(--accent); color:var(--ink) }
+.anggota-chip .avatar { transition:transform .2s ease }
+.anggota-chip:hover .avatar { transform:scale(1.08) }
+.brand-mark { transition:transform .35s ease }
+.brand:hover .brand-mark { transform:rotate(12deg) }
+.btn { transition:transform .2s ease,box-shadow .2s ease,background .2s ease }
+@media (prefers-reduced-motion:reduce) {
+  .hero-inner > div:first-child,.hero-inner > .terminal { animation:none }
+  .motion-ready .reveal { opacity:1; transform:none; transition:none }
+  .inti-card:hover,.divisi-card:hover,.anggota-chip:hover,.brand:hover .brand-mark { transform:none }
+}
 
 @media (prefers-reduced-motion:reduce) {
   html { scroll-behavior:auto }
