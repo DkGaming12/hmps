@@ -453,7 +453,7 @@
       divisi: [
         { tag: "DPA", nama: "Pemberdayaan Anggota", deskripsi: "Kaderisasi, upgrading skill, menjaga soliditas, dan pengembangan potensi seluruh anggota.", kepala: "", anggota: ["Muhammad Agus", "Riskha Syofiyana", "M. Ishom El Saha", "Neysa Alzena", "Naura Zahrani", "Fahdina Failasufa", "Zaki Rahul Fawas", "Muhammad Najiyyullah"] },
         { tag: "ILTEK", nama: "Keilmuan & Teknologi", deskripsi: "Wadah riset teknologi, pelatihan coding, dan pengembangan wawasan akademik mahasiswa Informatika.", kepala: "", anggota: ["Muchammad Soufwan Fauzi", "Milla Aszahra", "Muhammad Zaki Musyaffa", "Fitriani Lestari", "Hana Sabila Rizqiana", "Tri Winarsih", "Diah Ayu Wulandari", "Nafisah Naila Muna", "Fakhrul Arhabur Rizqi"] },
-        { tag: "DIGMUL", nama: "Digital & Multimedia", deskripsi: "Mengelola branding organisasi, konten kreatif media sosial, desain grafis, dan dokumentasi kegiatan.", kepala: "", anggota: ["Ahmad Turmudi", "Didi Purnomo", "Raesya Satria Mikaelana", "Armaylis Arfa", "M. Umar Yasin", "Kanza Rizqia Ahsana", "Muhammad Aditya Earlianto", "Keisya Janua Amandita"] },
+        { tag: "DIGMUL", nama: "Digital & Multimedia", deskripsi: "Mengelola branding organisasi, konten kreatif media sosial, desain grafis, dan dokumentasi kegiatan.", kepala: "", anggota: ["Ahmad Turmudi", "Didi Purnomo", "Raesya Satria Mikaelana", "Armaylis Arfa", "M. Umar Yasin", "Kanza Rizqia Ahsana", "Muhammad Aditya Earlianto"] },
         { tag: "ADVOKASI", nama: "Advokasi & Humas", deskripsi: "Jembatan informasi internal–eksternal serta mengadvokasi aspirasi mahasiswa kepada birokrasi.", kepala: "", anggota: ["Muhammad Faiz", "M. Risqi Agung Pratama", "Muhammad Fajrul Roziqin", "Delsie Thana Alfafa", "Rizqi Maulana Trisaputra", "Devi Augustin Umpriana Syaputri", "Aisyah Nur Ramadhani", "Muhamad Haris Saputra"] }
       ]
     };
@@ -504,6 +504,7 @@
           const nama = r[nIdx] || '';
           const jabatan = r[jIdx] || '';
           if (!nama || !jabatan) return;
+          if (nama === 'Keisya Janua Amandita') return;
           // Ignore malformed sheet rows where a phone number was entered as a jabatan.
           if (jabatan.replace(/\D/g, '').length >= 8) return;
           if (BPH_RE.test(jabatan)) {
