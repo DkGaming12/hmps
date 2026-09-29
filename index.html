@@ -504,6 +504,8 @@
           const nama = r[nIdx] || '';
           const jabatan = r[jIdx] || '';
           if (!nama || !jabatan) return;
+          // Ignore malformed sheet rows where a phone number was entered as a jabatan.
+          if (/^\+?[\d\s().-]{8,}$/.test(jabatan)) return;
           if (BPH_RE.test(jabatan)) {
             inti.push({ jabatan, nama });
           } else {
